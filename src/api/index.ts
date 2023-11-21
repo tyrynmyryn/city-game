@@ -1,6 +1,6 @@
-import { Cities } from '@/types/index';
+import { City } from '@/types/index';
 
-export const getCities = async (): Promise<Cities> => {
+export const getCities = async (): Promise<City[]> => {
   const list = await fetch('./cities.txt').then((res) => res.text());
-  return new Set(list.split('\n'));
+  return list.split('\n');
 };

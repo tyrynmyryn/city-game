@@ -1,5 +1,6 @@
+import { ReactNode } from 'react';
 type Props = {
-  children?: string | JSX.Element | JSX.Element[];
+  children?: string | JSX.Element | JSX.Element[] | ReactNode;
 };
 
 const CardContent = ({ children }: Props) => {

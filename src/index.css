@@ -2,3 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.cdnfonts.com/css/helvetica-neue-5');
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer components {
+  .curtain {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1.25rem;
+    z-index: 2;
+  }
+
+  .curtain-top {
+    @apply curtain top-0 bg-gradient-to-t from-transparent to-white;
+  }
+
+  .curtain-bottom {
+    @apply curtain bottom-0 bg-gradient-to-b from-transparent to-white;
+  }
+}

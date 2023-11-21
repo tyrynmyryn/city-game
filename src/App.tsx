@@ -1,28 +1,29 @@
-import { useEffect, useMemo, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
-import { getCities } from '@/api/index';
-import { Cities, Views } from '@/types/index';
-import Intro from '@/views/Intro';
+import { RootState } from '@/store';
+import { Views } from '@/types/index';
 import Game from '@/views/Game';
+import Intro from '@/views/Intro';
+import Result from '@/views/Result';
 
 const App = () => {
-  const [cities, setCities] = useState<Cities>(new Set());
-  const [view, setView] = useState<Views>(Views.INTRO);
-
-  useEffect(() => {
-    getCities().then(setCities);
-  }, []);
+  const view = useSelector((state: RootState) => state.views.view);
 
   const content = useMemo(() => {
-    return {
-      [Views.INTRO]: <Intro onStartGame={() => setView(Views.GAME)} />,
-      [Views.GAME]: <Game cities={cities} />,
+    const views = {
+      [Views.INTRO]: <Intro />,
+      [Views.GAME]: <Game />,
+      [Views.RESULT]: <Result />,
     };
-  }, [cities]);
+
+    return views[view];
+  }, [view]);
 
   return (
     <div className='min-w-full min-h-screen flex justify-center items-center font-helvetica'>
-      <div className='max-w-xl flex-1'>{content[view]}</div>
+      <div className='max-w-xl flex-1'>{content}</div>
     </div>
   );
 };

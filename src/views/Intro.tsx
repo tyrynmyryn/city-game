@@ -1,11 +1,13 @@
+import { useDispatch } from 'react-redux';
+
 import CardContent from '@/components/CardContent';
 import CardHeader from '@/components/CardHeader';
+import { changeViewTo } from '@/store/views';
+import { Views } from '@/types';
 
-interface Props {
-  onStartGame?: () => void;
-}
+const Intro = () => {
+  const dispatch = useDispatch();
 
-const Intro = ({ onStartGame }: Props) => {
   const rules = [
     'Запрещается повторение городов.',
     'Названий городов на твердый “ъ” и мягкий “ъ” знак нет. Из-за этого бы пропускаем эту букву и игрок должен назвать город на букву стоящую перед ъ или ь знаком.',
@@ -26,7 +28,7 @@ const Intro = ({ onStartGame }: Props) => {
         </ul>
         <button
           className='block mt-6 m-auto py-2 px-2 bg-violet-600 rounded text-base font-medium text-white'
-          onClick={onStartGame}
+          onClick={() => dispatch(changeViewTo(Views.GAME))}
         >
           Начать игру
         </button>
